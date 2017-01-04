@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ly.sys.core.permission.dao.RoleDao">
+	<resultMap id="roleResult" type="Role">
+		<id property="id" column="id" javaType="Long" />
+		<result property="name" column="name" javaType="String" />
+		<result property="role" column="role" javaType="String" />
+		<result property="description" column="description" javaType="String" />
+		<result property="isShow" column="is_show" javaType="Integer" />
+		<result property="deleted" column="deleted" javaType="Integer" />
+		<collection property="resource2Permissions" ofType="Role2Resource2Permission">
+			<result property="id" column="b_id" />
+			<result property="roleId" column="role_ids" />
+			<result property="resourceId" column="resource_id" />
+			<result property="permissionIds" column="permission_ids" />
+		</collection>
+	</resultMap>
+
+
+	<sql id="queryRoleSql">
+		<where>
+      	<![CDATA[
+			1=1
+		 ]]>
+			<if test="id!=null">
+			<![CDATA[
+				and T.id=#{id}
+			]]>
+			</if>
+			<if test="name!=null">
+			<![CDATA[
+				and T.name like "%"#{name}"%"
+			]]>
+			</if>
+			<if test="role!=null">
+			<![CDATA[
+				and T.role like "%"#{role}"%"
+			]]>
+			</if>
+			<if test="description!=null">
+			<![CDATA[
+				and T.description=#{description}
+			]]>
+			</if>
+			<if test="isShow!=null">
+			<![CDATA[
+				and T.is_show=#{isShow}
+			]]>
+			</if>
+			<if test="deleted!=null">
+			<![CDATA[
+				and T.deleted=#{deleted}
+			]]>
+			</if>
+		</where>
+	</sql>
+
+
+	<select id="findById2" resultMap="roleResult" parameterType="long">
+		<![CDATA[
+		SELECT
+		a.*
+		FROM sys_role a
+		 WHERE a.id=#{id}
+		]]>
+	</select>
+	<select id="findById" resultMap="roleResult" parameterType="long">
+		<![CDATA[
+		SELECT
+		a.*,
+		b.*
+		FROM sys_role a
+		left join sys_role2resource2permission b
+		on a.id=b.role_id
+		WHERE a.id=#{id}
+    ORDER BY b.resource_id
+		]]>
+	</select>
+
+	<select id="findPageList" resultMap="roleResult" parameterType="map">
+		<![CDATA[
+		select		
+		T.*
+		FROM sys_role T
+    	]]>
+		<include refid="queryRoleSql" />
+    	<![CDATA[
+		   ORDER BY T.id DESC 
+		]]>
+	</select>
+  
+	<select id="findPageList2" resultMap="roleResult" parameterType="map">
+		<![CDATA[
+		select		
+		T.*,
+		b.id as
+		b_id,
+		b.role_id,
+		b.resource_id,
+		b.permission_ids
+		FROM sys_role T
+		join sys_role2resource2permission b
+		on T.id=b.role_id
+    	]]>
+		<include refid="queryRoleSql" />
+    	<![CDATA[
+		   ORDER BY T.id DESC 
+		]]>
+	</select>
+
+	<select id="findList" resultMap="roleResult">
+		<![CDATA[
+		select		
+		T.*,
+		b.id as
+		b_id,
+		b.role_id,
+		b.resource_id,
+		b.permission_ids
+		FROM sys_role T
+		join sys_role2resource2permission b
+		on T.id=b.role_id
+    	]]>
+    	<![CDATA[
+		   ORDER BY T.id DESC 
+		]]>
+	</select>
+
+	<select id="findCount" resultType="Integer" parameterType="map">
+		<![CDATA[
+        	SELECT COUNT(1) FROM sys_role T
+    	]]>
+		<include refid="queryRoleSql" />
+	</select>
+
+	<insert id="insert" parameterType="Role">
+		<![CDATA[
+			INSERT INTO sys_role(
+												id,
+												name,
+												role,
+												description,
+												is_show,
+												deleted
+									)VALUES(
+								#{id},
+												#{name},
+												#{role},
+												#{description},
+												#{isShow},
+												#{deleted}
+									)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID() AS ID
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="Role">
+		<![CDATA[
+			UPDATE sys_role SET
+														name=#{name},
+																role=#{role},
+																description=#{description},
+																is_show=#{isShow},
+																deleted=#{deleted}
+										WHERE id=#{id}
+		]]>
+	</update>
+
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+			DELETE FROM sys_role WHERE id=#{id}
+		]]>
+	</delete>
+	<select id="findRole2Permissions" resultMap="roleResult">
+		select T.*,
+		b.id as
+		b_id,
+		b.role_id,
+		b.resource_id,
+		b.permission_ids
+		from
+		sys_role T
+		left join
+		sys_role2resource2permission b
+		on
+		T.id=b.role_id
+		where
+		T.id=#{id}
+		and
+		T.deleted=0
+	</select>
+</mapper>

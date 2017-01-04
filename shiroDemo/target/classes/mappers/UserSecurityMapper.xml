@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ly.sys.core.user.dao.UserSecurityDao">
+	<resultMap id="usersecurityResult" type="UserSecurity">
+			<id property="id" column="id" javaType="Long"/>
+				<result property="userId"  column="user_id"	javaType="Long"/>
+				<result property="aQuestion"  column="a_question"	javaType="String"/>
+				<result property="aAnswer"  column="a_answer"	javaType="String"/>
+				<result property="bQuestion"  column="b_question"	javaType="String"/>
+				<result property="bAnswer"  column="b_answer"	javaType="String"/>
+				<result property="cQuestion"  column="c_question"	javaType="String"/>
+				<result property="cAnswer"  column="c_answer"	javaType="String"/>
+				<result property="safeEmail"  column="safe_email"	javaType="String"/>
+			</resultMap>
+	
+	
+	<sql id="queryUserSecuritySql">
+      	<where>
+      	<![CDATA[
+			1=1
+		 ]]>
+						<if test="id!=null">
+			<![CDATA[
+				and T.id=#{id}
+			]]>
+		</if>
+								<if test="userId!=null">
+			<![CDATA[
+				and T.user_id=#{userId}
+			]]>
+		</if>
+								<if test="aQuestion!=null">
+			<![CDATA[
+				and T.a_question=#{aQuestion}
+			]]>
+		</if>
+								<if test="aAnswer!=null">
+			<![CDATA[
+				and T.a_answer=#{aAnswer}
+			]]>
+		</if>
+								<if test="bQuestion!=null">
+			<![CDATA[
+				and T.b_question=#{bQuestion}
+			]]>
+		</if>
+								<if test="bAnswer!=null">
+			<![CDATA[
+				and T.b_answer=#{bAnswer}
+			]]>
+		</if>
+								<if test="cQuestion!=null">
+			<![CDATA[
+				and T.c_question=#{cQuestion}
+			]]>
+		</if>
+								<if test="cAnswer!=null">
+			<![CDATA[
+				and T.c_answer=#{cAnswer}
+			]]>
+		</if>
+								<if test="safeEmail!=null">
+			<![CDATA[
+				and T.safe_email=#{safeEmail}
+			]]>
+		</if>
+				    	</where>
+   </sql>
+   
+   
+	<select id="findById" resultMap="usersecurityResult" parameterType="long">
+		<![CDATA[
+		SELECT
+		*
+		FROM sys_user_security WHERE id=#{id}
+		]]>
+	</select>
+  
+  <select id="findByUserId" resultMap="usersecurityResult" parameterType="long">
+    <![CDATA[
+    SELECT
+    *
+    FROM sys_user_security WHERE user_id=#{userId}
+    ]]>
+  </select>
+	
+	<select id="findPageList" resultMap="usersecurityResult" parameterType="map">
+		<![CDATA[
+			SELECT T.* FROM sys_user_security T 
+    	]]>
+    	<include refid="queryUserSecuritySql"/>
+    	<![CDATA[
+		   ORDER BY T.id DESC 
+		]]>
+        
+	</select>
+	
+	<select id="findCount" resultType="Integer" parameterType="map">
+		<![CDATA[
+        	SELECT COUNT(1) FROM sys_user_security T
+    	]]>
+    	<include refid="queryUserSecuritySql"/>
+	</select>
+	
+	<insert id="insert" parameterType="UserSecurity">
+		<![CDATA[
+			INSERT INTO sys_user_security(
+												id,
+												user_id,
+												a_question,
+												a_answer,
+												b_question,
+												b_answer,
+												c_question,
+												c_answer,
+												safe_email
+									)VALUES(
+								#{id},
+												#{userId},
+												#{aQuestion},
+												#{aAnswer},
+												#{bQuestion},
+												#{bAnswer},
+												#{cQuestion},
+												#{cAnswer},
+												#{safeEmail}
+									)
+		]]>
+		<selectKey resultType="long" keyProperty = "id">
+	     	 SELECT LAST_INSERT_ID() AS ID
+	    </selectKey>
+	</insert>
+	
+	<update id="update" parameterType="UserSecurity">
+		<![CDATA[
+			UPDATE sys_user_security SET
+														user_id=#{userId},
+																a_question=#{aQuestion},
+																a_answer=#{aAnswer},
+																b_question=#{bQuestion},
+																b_answer=#{bAnswer},
+																c_question=#{cQuestion},
+																c_answer=#{cAnswer},
+																safe_email=#{safeEmail}
+										WHERE id=#{id}
+		]]>
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+			DELETE FROM sys_user_security WHERE id=#{id}
+		]]>
+	</delete>
+  
+  
+</mapper>

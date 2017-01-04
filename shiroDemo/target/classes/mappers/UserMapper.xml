@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ly.sys.core.user.dao.UserDao">
+	<resultMap id="userResult" type="User">
+		<id property="id" column="id" javaType="Long"/>
+    <result property="thirdId"  column="third_id"  javaType="Long"/>
+		<result property="source"  column="source"	javaType="String"/>
+		<result property="username"  column="username"	javaType="String"/>
+		<result property="email"  column="email"	javaType="String"/>
+		<result property="mobile"  column="mobile"	javaType="String"/>
+		<result property="password"  column="password"	javaType="String"/>
+		<result property="type"  column="type"	javaType="Integer"/>
+		<result property="deleted"  column="deleted"	javaType="Integer"/>
+		<result property="createDate"  column="create_date"	javaType="Date"/>
+		<result property="status"  column="status"	javaType="Integer"/>
+		<result property="isEmailVerified"  column="is_email_verified"	javaType="Integer"/>
+		<result property="isMobileVerified"  column="is_mobile_verified"	javaType="Integer"/>
+    <result property="newEncrypted" column="new_encrypted" />
+	</resultMap>
+	
+	
+	<sql id="queryUserSql">
+		<where>
+		<![CDATA[
+			1=1
+		]]>
+			<if test="id!=null">
+			<![CDATA[
+				and T.id=#{id}
+			]]>
+			</if>
+			<if test="source!=null">
+			<![CDATA[
+				and T.source=#{source}
+			]]>
+			</if>
+			<if test="username!=null">
+			<![CDATA[
+				and T.username=#{username}
+			]]>
+			</if>
+			<if test="email!=null">
+			<![CDATA[
+				and T.email=#{email}
+			]]>
+			</if>
+			<if test="mobile!=null">
+			<![CDATA[
+				and T.mobile=#{mobile}
+			]]>
+			</if>
+			<if test="password!=null">
+			<![CDATA[
+				and T.password=#{password}
+			]]>
+			</if>
+			<if test="type!=null">
+			<![CDATA[
+				and T.type=#{type}
+			]]>
+			</if>
+			<if test="deleted!=null">
+			<![CDATA[
+				and T.deleted=#{deleted}
+			]]>
+			</if>
+			<if test="createDate!=null">
+			<![CDATA[
+				and T.create_date=#{createDate}
+			]]>
+			</if>
+			<if test="status!=null">
+			<![CDATA[
+				and T.status=#{status}
+			]]>
+			</if>
+		</where>
+	</sql>
+  
+    <select id="findUserByIds" resultMap="userResult"  resultType="User" parameterType="Integer">
+    select * from sys_user u
+    <where>
+      u.id in
+      (
+      <foreach collection="list" item="id" index="index" separator=",">
+        #{id}
+      </foreach>
+      )
+    </where>
+  </select>
+  
+   
+	<select id="check" resultMap="userResult" >
+	<![CDATA[
+		SELECT
+		*
+		FROM sys_user WHERE ${field}=#{param}
+
+	]]>
+		<if test="source!=null and source!=''">
+		<![CDATA[
+			and source=#{source}
+		]]>
+		</if>
+	</select>
+  
+	<select id="findUser" resultMap="userResult" >
+	<![CDATA[
+		SELECT
+		*
+		FROM sys_user WHERE username = #{username} and password = #{password}
+	]]>
+		<if test="source!=null and source!=''">
+		<![CDATA[
+			and source=#{source}
+		]]>
+		</if>
+	<![CDATA[
+		and status = 1 and deleted = 0
+	]]>
+	</select>
+   
+	<select id="findById" resultMap="userResult" parameterType="long">
+	<![CDATA[
+		SELECT
+		*
+		FROM sys_user WHERE id=#{id}
+	]]>
+	</select>
+	
+  <select id="findByThirdIdAndSource" resultMap="userResult">
+  <![CDATA[
+    SELECT
+    *
+    FROM sys_user WHERE third_id=#{thirdId} and source=#{source} and status = 1 and deleted = 0 limit 1
+  ]]>
+  </select>
+  
+	<select id="findPageList" resultMap="userResult" parameterType="map">
+	<![CDATA[
+		SELECT T.* FROM sys_user T 
+	]]>
+		<include refid="queryUserSql"/>
+	<![CDATA[
+		   ORDER BY T.id DESC 
+	]]>
+        
+	</select>
+	
+	<select id="findCount" resultType="Integer" parameterType="map">
+	<![CDATA[
+		SELECT COUNT(1) FROM sys_user T
+	]]>
+		<include refid="queryUserSql"/>
+	</select>
+	
+	<insert id="insert" parameterType="User">
+	<![CDATA[
+		INSERT INTO sys_user(
+											id,
+                      third_id,
+											source,
+											username,
+											email,
+											mobile,
+											password,
+											type,
+											deleted,
+											create_date,
+											status,
+											is_email_verified,
+											is_mobile_verified,
+                      new_encrypted
+								)VALUES(
+							#{id},
+                      #{thirdId},
+											#{source},
+											#{username},
+											#{email},
+											#{mobile},
+											#{password},
+											#{type},
+											#{deleted},
+											#{createDate},
+											#{status},
+											#{isEmailVerified},
+											#{isMobileVerified},
+                      #{newEncrypted}
+								)
+	]]>
+		<selectKey resultType="long" keyProperty = "id">
+	     	 SELECT LAST_INSERT_ID() AS ID
+		</selectKey>
+	</insert>
+	
+	<insert id="batchInsert" parameterType="list">
+		insert into sys_user(
+		id ,
+		source ,
+		username ,
+		email ,
+		mobile ,
+		password ,
+		type ,
+		deleted ,
+		create_date ,
+		status,
+		is_email_verified,
+		is_mobile_verified,
+    new_encrypted
+		)
+		values
+		<foreach collection="list" item="user" index="index"
+			separator=",">
+			(
+			#{user.id },
+			#{user.source} ,
+			#{user.username} ,
+			#{user.email} ,
+			#{user.mobile} ,
+			#{user.password} ,
+			#{user.type} ,
+			#{user.deleted} ,
+			#{user.createDate},
+			#{user.status},
+			#{user.isEmailVerified},
+			#{user.isMobileVerified},
+      #{newEncrypted}
+			)
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterType="User">
+	<![CDATA[
+		UPDATE sys_user SET
+													source=#{source},
+															username=#{username},
+															email=#{email},
+															mobile=#{mobile},
+															password=#{password},
+															type=#{type},
+															deleted=#{deleted},
+															create_date=#{createDate},
+															status=#{status},
+															is_email_verified=#{isEmailVerified},
+															is_mobile_verified=#{isMobileVerified},
+                              new_encrypted=#{newEncrypted}
+									WHERE id=#{id}
+	]]>
+	</update>
+	<update id="batchUpdate" parameterType="list">
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=";">
+			update sys_user
+			<set>
+				source=#{item.source},
+				username=#{item.username},
+				email=#{item.email},
+				mobile=#{item.mobile},
+				password=#{item.password},
+				type=#{item.type},
+				deleted=#{item.deleted},
+				create_date=#{item.createDate},
+				status=#{item.status},
+				is_email_verified=#{item.isEmailVerified},
+				is_mobile_verified=#{item.isMobileVerified},
+        new_encrypted=#{newEncrypted}
+			</set>
+			where id = #{item.id}
+		</foreach>
+	</update>
+	
+	<update id="updateUser" parameterType="User">
+      UPDATE sys_user SET id = id 
+		<if test="username!=null and username!=''">
+      ,username=#{username}
+		</if>
+		<if test="mobile!=null and mobile!=''">
+      ,mobile=#{mobile}
+		</if>
+    <if test="password!=null and password!=''">
+      ,password=#{password}
+    </if>
+    <if test="newEncrypted!=null and newEncrypted!=''">
+      ,new_encrypted=#{newEncrypted}
+    </if>
+       where id = #{id}
+	</update>
+  
+	<update id="updateUserMobileApprove">
+      UPDATE sys_user SET mobile=#{mobile},is_mobile_verified=1 where id = #{id}
+	</update>
+  
+	<delete id="delete" parameterType="long">
+	<![CDATA[
+		DELETE FROM sys_user WHERE id=#{id}
+	]]>
+	</delete>
+</mapper>

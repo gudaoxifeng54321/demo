@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ly.sys.core.permission.dao.Resource2PermissionDao">
+	<resultMap id="resource2permissionResult" type="Resource2Permission">
+			<id property="id" column="id" javaType="Long"/>
+				<result property="resourceId"  column="resource_id"	javaType="Long"/>
+				<result property="permissionId"  column="permission_id"	javaType="Long"/>
+			</resultMap>
+	
+	
+	<sql id="queryResource2PermissionSql">
+      	<where>
+      	<![CDATA[
+			1=1
+		 ]]>
+						<if test="id!=null">
+			<![CDATA[
+				and T.id=#{id}
+			]]>
+		</if>
+								<if test="resourceId!=null">
+			<![CDATA[
+				and T.resource_id=#{resourceId}
+			]]>
+		</if>
+								<if test="permissionId!=null">
+			<![CDATA[
+				and T.permission_id=#{permissionId}
+			]]>
+		</if>
+				    	</where>
+   </sql>
+   
+   
+	<select id="findById" resultMap="resource2permissionResult" parameterType="long">
+		<![CDATA[
+		SELECT
+		*
+		FROM sys_resource2permission WHERE id=#{id}
+		]]>
+	</select>
+	
+	<select id="findPageList" resultMap="resource2permissionResult" parameterType="map">
+		<![CDATA[
+			SELECT T.* FROM sys_resource2permission T 
+    	]]>
+    	<include refid="queryResource2PermissionSql"/>
+    	<![CDATA[
+		   ORDER BY T.id DESC 
+		]]>
+        
+	</select>
+	
+	<select id="findCount" resultType="Integer" parameterType="map">
+		<![CDATA[
+        	SELECT COUNT(1) FROM sys_resource2permission T
+    	]]>
+    	<include refid="queryResource2PermissionSql"/>
+	</select>
+	
+	<insert id="insert" parameterType="Resource2Permission">
+		<![CDATA[
+			INSERT INTO sys_resource2permission(
+												id,
+												resource_id,
+												permission_id
+									)VALUES(
+								#{id},
+												#{resourceId},
+												#{permissionId}
+									)
+		]]>
+		<selectKey resultType="long" keyProperty = "id">
+	     	 SELECT LAST_INSERT_ID() AS ID
+	    </selectKey>
+	</insert>
+	
+	<update id="update" parameterType="Resource2Permission">
+		<![CDATA[
+			UPDATE sys_resource2permission SET
+														resource_id=#{resourceId},
+																permission_id=#{permissionId}
+										WHERE id=#{id}
+		]]>
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+			DELETE FROM sys_resource2permission WHERE id=#{id}
+		]]>
+	</delete>
+</mapper>

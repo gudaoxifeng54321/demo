@@ -1,0 +1,87 @@
+package ${packageName}.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.github.pagehelper.PageHelper;
+import com.go2plus.common.mvc.Pagination;
+import com.github.pagehelper.PageInfo;
+import ${packageName}.${entityPackageName}.${entityName};
+import com.go2plus.product.common.exception.SystemException;
+
+ /**
+ * <p>Description: this is ${entityName} Service
+ * <p>User: ${author}
+ * <p>Date: ${date}
+ * <p>Version: 1.0
+ */
+ 
+public interface ${entityName}Service {
+
+	/**
+	 * page query ${entityName} information
+	 * @param query${entityName}
+	 * @return ArrayList
+	 * @throws SystemException
+	 */
+    public PageInfo<${entityName}> findPageList(Map<String,Object> queryMap,Pagination pagination) throws SystemException;
+    
+    /**
+	 * query ${entityName} information
+	 * @return ArrayList
+	 * @throws SystemException
+	 
+    public List<${entityName}> findList() throws SystemException;
+    */
+    
+    /**
+	 * get a ${entityName} information
+	 * @param id
+	 * @return ${entityName}
+	 * @throws SystemException
+	 */
+    public ${entityName} findById(Long id) throws SystemException;
+    
+	/**
+	 * add one ${entityName} information
+	 * @param ${entityName}
+	 * @throws SystemException
+	 */
+	public void add(${entityName} ${entityName.toLowerCase()}) throws SystemException;
+	
+	/**
+	 *  update one ${entityName} information
+	 * @param ${entityName}
+	 * @throws SystemException
+	 */
+	public void update(${entityName} ${entityName.toLowerCase()}) throws SystemException;
+	
+	/**
+	 * add or update one ${entityName} information
+	 * @param ${entityName}
+	 * @throws SystemException
+	 */
+	public boolean save(${entityName} ${entityName.toLowerCase()}) throws SystemException;
+	
+	/**
+	 * delete one or more ${entityName} information
+	 * @param ids by "," split
+	 * @throws SystemException
+	 */
+    public void delete(Long[] ids )throws SystemException;
+    
+    /**
+	 * delete one ${entityName} information
+	 * @param id
+	 * @throws SystemException
+	 */
+    public void delete(Long id)throws SystemException;
+    
+    /**
+   * 使用BeanUtils的成本惊人地昂贵,手动写是最效率的，缺点增加了代码长度和阅读代码的难度
+   * @param adsiteorder
+   * @param adsiteorderForm
+   */
+   public void copyProperties(${entityName} dest,${entityName} orig);
+}
+

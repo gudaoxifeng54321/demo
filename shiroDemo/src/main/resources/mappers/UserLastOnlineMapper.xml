@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ly.sys.core.user.dao.UserLastOnlineDao">
+	<resultMap id="userlastonlineResult" type="UserLastOnline">
+			<id property="id" column="id" javaType="Long"/>
+				<result property="userId"  column="user_id"	javaType="Long"/>
+				<result property="username"  column="username"	javaType="String"/>
+				<result property="lastLoginTimestamp"  column="last_login_timestamp"	javaType="Date"/>
+				<result property="loginCount"  column="login_count"	javaType="Integer"/>
+				<result property="host"  column="host"	javaType="String"/>
+				<result property="userAgent"  column="user_agent"	javaType="String"/>
+			</resultMap>
+	
+	
+	<sql id="queryUserLastOnlineSql">
+      	<where>
+      	<![CDATA[
+			1=1
+		 ]]>
+						<if test="id!=null">
+			<![CDATA[
+				and T.id=#{id}
+			]]>
+		</if>
+								<if test="userId!=null">
+			<![CDATA[
+				and T.user_id=#{userId}
+			]]>
+		</if>
+								<if test="username!=null">
+			<![CDATA[
+				and T.username=#{username}
+			]]>
+		</if>
+								<if test="lastLoginTimestamp!=null">
+			<![CDATA[
+				and T.last_login_timestamp=#{lastLoginTimestamp}
+			]]>
+		</if>
+								<if test="loginCount!=null">
+			<![CDATA[
+				and T.login_count=#{loginCount}
+			]]>
+		</if>
+								<if test="host!=null">
+			<![CDATA[
+				and T.host=#{host}
+			]]>
+		</if>
+								<if test="userAgent!=null">
+			<![CDATA[
+				and T.user_agent=#{userAgent}
+			]]>
+		</if>
+				    	</where>
+   </sql>
+   
+   
+	<select id="findById" resultMap="userlastonlineResult" parameterType="long">
+		<![CDATA[
+		SELECT
+		*
+		FROM sys_user_last_online WHERE id=#{id}
+		]]>
+	</select>
+  
+  <select id="findByUserId" resultMap="userlastonlineResult" parameterType="long">
+    <![CDATA[
+    SELECT
+    *
+    FROM sys_user_last_online WHERE user_id=#{userId}
+    ]]>
+  </select>
+	
+	<select id="findPageList" resultMap="userlastonlineResult" parameterType="map">
+		<![CDATA[
+			SELECT T.* FROM sys_user_last_online T 
+    	]]>
+    	<include refid="queryUserLastOnlineSql"/>
+    	<![CDATA[
+		   ORDER BY T.id DESC 
+		]]>
+        
+	</select>
+	
+	<select id="findCount" resultType="Integer" parameterType="map">
+		<![CDATA[
+        	SELECT COUNT(1) FROM sys_user_last_online T
+    	]]>
+    	<include refid="queryUserLastOnlineSql"/>
+	</select>
+	
+	<insert id="insert" parameterType="UserLastOnline">
+		<![CDATA[
+			INSERT INTO sys_user_last_online(
+												id,
+												user_id,
+												username,
+												last_login_timestamp,
+												login_count,
+												host,
+												user_agent
+									)VALUES(
+								#{id},
+												#{userId},
+												#{username},
+												#{lastLoginTimestamp},
+												#{loginCount},
+												#{host},
+												#{userAgent}
+									)
+		]]>
+		<selectKey resultType="long" keyProperty = "id">
+	     	 SELECT LAST_INSERT_ID() AS ID
+	    </selectKey>
+	</insert>
+	
+	<update id="update" parameterType="UserLastOnline">
+		<![CDATA[
+			UPDATE sys_user_last_online SET
+														user_id=#{userId},
+																username=#{username},
+																last_login_timestamp=#{lastLoginTimestamp},
+																login_count=#{loginCount},
+																host=#{host},
+																user_agent=#{userAgent}
+										WHERE id=#{id}
+		]]>
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+			DELETE FROM sys_user_last_online WHERE id=#{id}
+		]]>
+	</delete>
+</mapper>
