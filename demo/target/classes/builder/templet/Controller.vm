@@ -1,0 +1,28 @@
+package ${packageName}.web.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import ${packageName}.entity.${entityName};
+import ${packageName}.service.${entityName}Service;
+import com.mtwu.common.web.controller.BaseCRUDController;
+
+
+/**
+ * <p>Description: this is ${entityName} Controller
+ * <p>@author ${author}
+ * <p>Date: ${date}
+ * <p>Version: 1.0
+ */
+@Controller
+@RequestMapping("/${entityName.toLowerCase()}")
+public class ${entityName}Controller extends BaseCRUDController<${entityName}, Long> {
+	
+	public ${entityName}Controller() {
+        setResourceIdentity("ModelName:${entityName.toLowerCase()}");
+    }
+    
+    public ${entityName}Service get${entityName}Service(){
+		return (${entityName}Service)this.baseService;
+	}
+}
