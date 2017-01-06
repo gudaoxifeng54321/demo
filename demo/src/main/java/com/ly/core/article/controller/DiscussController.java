@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
-import com.ly.common.json.Json;
 import com.ly.common.mvc.BaseController;
 import com.ly.common.mvc.Box;
 import com.ly.core.article.service.DiscussService;
@@ -35,14 +35,19 @@ public class DiscussController extends BaseController {
 	@Autowired
 	private DiscussService discussService;
 	
-	
-	@RequestMapping("/list/json")
+	/**
+	 * , produces = "application/json;charset=utf-8"
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/list/json", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String list(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("DiscussController.list()");
 	    Box box = loadNewBox(request);
 	    PageInfo<Discuss> pageInfo = discussService.findPageList(box.getPagination());
-	    return Json.toJson(pageInfo);
+	    return JSON.toJSONString(pageInfo);
 	}
 	
 	
