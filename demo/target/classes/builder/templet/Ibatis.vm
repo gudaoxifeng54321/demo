@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+#set($cols = "")
+#set($querySuffix = "Id")
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="${packageName}.${daoPackageName}.${entityName}Dao">
+	<resultMap id="${entityName.toLowerCase()}Result" type="${entityName}">
+	#foreach( $col in $list )
+	#if(${col.prikey}==false)
+	<result property="${col.columnName}"  column="${col.dbColumnName}"	javaType="${col.javaType}"/>
+	#else
+	<id property="id" column="${col.dbColumnName}" javaType="${idType}"/>
+	#end
+	#end
+	</resultMap>
+	
+	
+	<sql id="query${entityName}Sql">
+      	<where>
+      	<![CDATA[
+			1=1
+		 ]]>
+		#foreach( $col in $list )
+		#if(${col.fetch}==false)
+		<if test="${col.columnName}!=null">
+			<![CDATA[
+				and ${tableAliasName}.${col.dbColumnName}=#{${col.columnName}}
+			]]>
+		</if>
+		#else
+		<if test="${col.columnName}${querySuffix}!=null">
+			<![CDATA[
+			and ${tableAliasName}.${col.dbColumnName}=#{${col.columnName}${querySuffix}}
+			]]>
+		</if>
+		#end
+		#end
+    	</where>
+   </sql>
+   
+   
+	<select id="findById" resultMap="${entityName.toLowerCase()}Result" parameterType="${idType}">
+		<![CDATA[
+		SELECT
+		*
+		FROM ${tableName} WHERE id=#{id}
+		]]>
+	</select>
+	
+	<select id="findPageList" resultMap="${entityName.toLowerCase()}Result" parameterType="map">
+		<![CDATA[
+			SELECT ${tableAliasName}.* FROM ${tables} 
+    	]]>
+    	<include refid="query${entityName}Sql"/>
+    	<![CDATA[
+		   ORDER BY ${tableAliasName}.id DESC 
+		]]>
+        
+	</select>
+	
+	<select id="findCount" resultType="Integer" parameterType="map">
+		<![CDATA[
+        	SELECT COUNT(1) FROM ${tables}
+    	]]>
+    	<include refid="query${entityName}Sql"/>
+	</select>
+	
+	<insert id="insert" parameterType="${entityName}">
+		<![CDATA[
+			INSERT INTO ${tableName}(
+			#set($size = $list.size())
+			#foreach( $col in $list )
+			#if($velocityCount == $size)
+			${col.dbColumnName}
+			#else
+			${col.dbColumnName},
+			#end
+			#end
+			)VALUES(
+		#foreach( $col in $list )
+		#if($velocityCount == $size)
+		#if(${col.fetch}==false)
+		#{${col.columnName}}
+		#else
+		#{${col.columnName}.id}
+		#end
+		#else
+		#if(${col.fetch}==false)
+		#{${col.columnName}},
+		#else
+		#{${col.columnName}.id},
+		#end
+		#end
+		#set($cols = "$cols,${col.dbColumnName}")
+		#end
+			)
+		]]>
+		<selectKey resultType="${idType}" keyProperty = "id">
+	     	 SELECT LAST_INSERT_ID() AS ID
+	    </selectKey>
+	</insert>
+	#if(${maker.batch} == true)
+	<insert id="batchInsert" parameterType="List">
+		<![CDATA[
+			INSERT INTO ${tableName}(
+			#set($size = $list.size())
+			#foreach( $col in $list )
+			#if($velocityCount == $size)
+			${col.dbColumnName}
+			#else
+			${col.dbColumnName},
+			#end
+			#end
+			)VALUES
+		]]>
+			<foreach collection="list" index="index" item="item" separator=",">
+		<![CDATA[
+			(
+		#foreach( $col in $list )
+		#if($velocityCount == $size)
+		#if(${col.fetch}==false)
+		#{item.${col.columnName}}
+		#else
+		#{item.${col.columnName}.id}
+		#end
+		#else
+		#if(${col.fetch}==false)
+		#{item.${col.columnName}},
+		#else
+		#{item.${col.columnName}.id},
+		#end
+		#end
+		#set($cols = "$cols,${col.dbColumnName}")
+		#end
+			)
+		]]>
+		</foreach>
+	</insert>
+	#end
+	<update id="update" parameterType="${entityName}">
+		<![CDATA[
+			UPDATE ${tableName} SET
+		#foreach( $col in $list )
+		#if(${col.prikey}==false)
+		#if($velocityCount == $size)
+		#if(${col.fetch}==false)
+		${col.dbColumnName}=#{${col.columnName}}
+		#else
+		${col.dbColumnName}=#{${col.columnName}.id}
+		#end
+		#else
+		#if(${col.fetch}==false)
+		${col.dbColumnName}=#{${col.columnName}},
+		#else
+		${col.dbColumnName}=#{${col.columnName}.id},
+		#end
+		#end
+		#end
+		#end
+		WHERE id=#{id}
+		]]>
+	</update>
+	#if(${maker.batch} == true)
+	<update id="batchUpdate" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+		<![CDATA[
+			UPDATE ${tableName} SET
+		#foreach( $col in $list )
+		#if(${col.prikey}==false)
+		#if($velocityCount == $size)
+		#if(${col.fetch}==false)
+		${col.dbColumnName}=#{item.${col.columnName}}
+		#else
+		${col.dbColumnName}=#{item.${col.columnName}.id}
+		#end
+		#else
+		#if(${col.fetch}==false)
+		${col.dbColumnName}=#{item.${col.columnName}},
+		#else
+		${col.dbColumnName}=#{item.${col.columnName}.id},
+		#end
+		#end
+		#end
+		#end
+		WHERE id=#{item.id}
+		]]>
+		</foreach>
+	</update>
+	#end
+	<delete id="delete" parameterType="${idType}">
+		<![CDATA[
+			DELETE FROM ${tableName} WHERE id=#{id}
+		]]>
+	</delete>
+</mapper>
