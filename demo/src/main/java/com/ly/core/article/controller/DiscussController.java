@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
+import com.ly.common.json.Json;
 import com.ly.common.mvc.BaseController;
 import com.ly.common.mvc.Box;
 import com.ly.core.article.service.DiscussService;
@@ -54,6 +55,19 @@ public class DiscussController extends BaseController {
 	    Box box = loadNewBox(request);
 	    PageInfo<Discuss> pageInfo = discussService.findPageList(box.getPagination());
 	    return JSON.toJSONString(pageInfo);
+	}
+	
+	
+	
+	@RequestMapping(value="/list2/json", produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public String list2(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("DiscussController.list2()");
+	    Box box = loadNewBox(request);
+	    String jsonp=request.getParameter("callback");
+	    PageInfo<Discuss> pageInfo = discussService.findPageList(box.getPagination());
+	    String rt =  jsonp+"('"+JSON.toJSONString(pageInfo)+"')";
+	    return rt;
 	}
 	
 	
