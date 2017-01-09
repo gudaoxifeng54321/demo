@@ -45,6 +45,12 @@ public class DiscussController extends BaseController {
 	@ResponseBody
 	public String list(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("DiscussController.list()");
+		 response.reset();
+	    response.setHeader("Access-Control-Allow-Origin", "*");
+	    response.setHeader("Access-Control-Request-Method", "POST");
+	    response.setHeader("Pragma", "No-cache");
+	    response.setHeader("Cache-Control", "no-cache");
+	    response.setContentType("text/" + "html" + "; charset=utf-8");
 	    Box box = loadNewBox(request);
 	    PageInfo<Discuss> pageInfo = discussService.findPageList(box.getPagination());
 	    return JSON.toJSONString(pageInfo);
