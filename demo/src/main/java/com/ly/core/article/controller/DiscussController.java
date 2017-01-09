@@ -45,7 +45,7 @@ public class DiscussController extends BaseController {
 	@ResponseBody
 	public String list(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("DiscussController.list()");
-		 response.reset();
+		response.reset();
 	    response.setHeader("Access-Control-Allow-Origin", "*");
 	    response.setHeader("Access-Control-Request-Method", "POST");
 	    response.setHeader("Pragma", "No-cache");
