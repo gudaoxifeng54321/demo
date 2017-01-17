@@ -49,8 +49,8 @@
     <property name="dataSource" ref="dataSource" />
     <property name="typeAliasesPackage"
       value="
-	    com.ly.core.user.vo;
-	    com.ly.core.article.vo;
+	    com.ly.blog.core.user.vo;
+	    com.ly.blog.core.article.vo;
     " />
     <property name="plugins">
       <array>

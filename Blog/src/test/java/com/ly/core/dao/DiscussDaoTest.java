@@ -7,10 +7,10 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import com.ly.bolg.core.article.dao.DiscussDao;
-import com.ly.bolg.core.article.vo.Discuss;
-import com.ly.bolg.core.user.dao.UserDao;
-import com.ly.bolg.core.user.vo.User;
+import com.ly.blog.core.article.dao.DiscussDao;
+import com.ly.blog.core.article.vo.Discuss;
+import com.ly.blog.core.user.dao.UserDao;
+import com.ly.blog.core.user.vo.User;
 import com.ly.common.encrypt.MD5;
 
 public class DiscussDaoTest {
