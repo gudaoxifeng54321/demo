@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ly.core.user.dao.UserDao">
+	<resultMap id="userResult" type="User">
+		<id property="id" column="id" javaType="Integer"/>
+		<result property="username"  column="username"	javaType="String"/>
+		<result property="password"  column="password"	javaType="String"/>
+	</resultMap>
+	
+	
+	<sql id="queryUserSql">
+      	<where>
+      	<![CDATA[
+			1=1
+		 ]]>
+		<if test="id!=null">
+			<![CDATA[
+				and u.id=#{id}
+			]]>
+		</if>
+		<if test="username!=null">
+			<![CDATA[
+				and u.username=#{username}
+			]]>
+		</if>
+		<if test="password!=null">
+			<![CDATA[
+				and u.password=#{password}
+			]]>
+		</if>
+		</where>
+   </sql>
+   
+   
+	<select id="findById" resultMap="userResult" parameterType="Integer">
+		<![CDATA[
+		SELECT
+		*
+		FROM user WHERE id=#{id}
+		]]>
+	</select>
+	
+	<select id="findPageList" resultMap="userResult" parameterType="map">
+		<![CDATA[
+			SELECT u.* FROM user u 
+    	]]>
+    	<include refid="queryUserSql"/>
+    	<![CDATA[
+		   ORDER BY u.id DESC 
+		]]>
+        
+	</select>
+	
+	<select id="findCount" resultType="Integer" parameterType="map">
+		<![CDATA[
+        	SELECT COUNT(1) FROM user u
+    	]]>
+    	<include refid="queryUserSql"/>
+	</select>
+	
+	<insert id="insert" parameterType="User">
+		<![CDATA[
+			INSERT INTO user(
+												id,
+												username,
+												password
+									)VALUES(
+												#{id},
+												#{username},
+												#{password}
+									)
+		]]>
+		<selectKey resultType="Integer" keyProperty = "id">
+	     	 SELECT LAST_INSERT_ID() AS ID
+	    </selectKey>
+	</insert>
+		<update id="update" parameterType="User">
+		<![CDATA[
+			UPDATE user SET
+						username=#{username},
+						password=#{password}
+						WHERE id=#{id}
+		]]>
+	</update>
+		<delete id="delete" parameterType="Integer">
+		<![CDATA[
+			DELETE FROM user WHERE id=#{id}
+		]]>
+	</delete>
+</mapper>

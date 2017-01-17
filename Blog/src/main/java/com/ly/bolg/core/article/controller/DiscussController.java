@@ -1,4 +1,4 @@
-package com.ly.core.article.controller;
+package com.ly.bolg.core.article.controller;
 
 
 
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
+import com.ly.bolg.core.article.service.DiscussService;
+import com.ly.bolg.core.article.vo.Discuss;
 import com.ly.common.json.Json;
 import com.ly.common.mvc.BaseController;
 import com.ly.common.mvc.Box;
-import com.ly.core.article.service.DiscussService;
-import com.ly.core.article.vo.Discuss;
 
 
 

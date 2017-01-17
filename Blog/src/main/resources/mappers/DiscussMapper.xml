@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ly.core.article.dao.DiscussDao">
+	<resultMap id="discussResult" type="Discuss">
+			<id property="id" column="id" javaType="Integer"/>
+				<result property="content"  column="content"	javaType="String"/>
+				<result property="articleId"  column="article_id"	javaType="Integer"/>
+			</resultMap>
+	
+	
+	<sql id="queryDiscussSql">
+      	<where>
+      	<![CDATA[
+			1=1
+		 ]]>
+						<if test="id!=null">
+			<![CDATA[
+				and d.id=#{id}
+			]]>
+		</if>
+								<if test="content!=null">
+			<![CDATA[
+				and d.content=#{content}
+			]]>
+			
+		</if>
+			<if test="articleId!=null">
+			<![CDATA[
+				and d.article_id=#{articleId}
+			]]>
+			
+		</if>
+				    	</where>
+   </sql>
+   
+   
+	<select id="findById" resultMap="discussResult" parameterType="Integer">
+		<![CDATA[
+		SELECT
+		*
+		FROM discuss WHERE id=#{id}
+		]]>
+	</select>
+	
+	<select id="findPageList" resultMap="discussResult" parameterType="map">
+		<![CDATA[
+			SELECT d.* FROM discuss d 
+    	]]>
+    	<include refid="queryDiscussSql"/>
+    	<![CDATA[
+		   ORDER BY d.id DESC 
+		]]>
+        
+	</select>
+	
+	<select id="findCount" resultType="Integer" parameterType="map">
+		<![CDATA[
+        	SELECT COUNT(1) FROM discuss d
+    	]]>
+    	<include refid="queryDiscussSql"/>
+	</select>
+	
+	<insert id="insert" parameterType="Discuss">
+		<![CDATA[
+			INSERT INTO discuss(
+												id,
+												content,
+												article_id
+									)VALUES(
+								#{id},
+												#{content},
+												#{articleId}
+									)
+		]]>
+		<selectKey resultType="Integer" keyProperty = "id">
+	     	 SELECT LAST_INSERT_ID() AS ID
+	    </selectKey>
+	</insert>
+		<update id="update" parameterType="Discuss">
+		<![CDATA[
+			UPDATE discuss SET
+														content=#{content},
+														article_id=#{articleId}
+										WHERE id=#{id}
+		]]>
+	</update>
+		<delete id="delete" parameterType="Integer">
+		<![CDATA[
+			DELETE FROM discuss WHERE id=#{id}
+		]]>
+	</delete>
+</mapper>
