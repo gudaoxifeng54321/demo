@@ -117,5 +117,6 @@
     <aop:advisor pointcut-ref="pc" advice-ref="userTxAdvice" />
   </aop:config>
   <task:annotation-driven />
+  <import resource="applicationContext-ActiveMQ.xml"/>
 </beans>
 
