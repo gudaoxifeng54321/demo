@@ -3,7 +3,7 @@
 PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="com.ly.core.user.dao.ScoreDao">
+<mapper namespace="com.ly.blog.core.user.dao.ScoreDao">
 
   <!-- list -->
   <select id="list" resultType="Score">

@@ -83,6 +83,12 @@
             <version>${spring.version}</version>  
             <scope>test</scope>  
         </dependency>  
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
   
         <!-- mybatis 包 -->  
         <dependency>  
@@ -170,6 +176,13 @@
             <groupId>org.codehaus.jackson</groupId>  
             <artifactId>jackson-mapper-asl</artifactId>  
             <version>1.9.13</version>  
+        </dependency>  
+        
+         <!-- freemarker -->  
+        <dependency>  
+            <groupId>org.freemarker</groupId>  
+            <artifactId>freemarker</artifactId>  
+            <version>2.3.21</version>  
         </dependency>  
         
         <!-- logback -->  
