@@ -1,0 +1,141 @@
+2016-12-29 14:02:26,980 - Log4JLogChute initialized using file 'velocity.log'
+2016-12-29 14:02:26,980 - Initializing Velocity, Calling init()...
+2016-12-29 14:02:26,980 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2016-12-29 14:02:26,980 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2016-12-29 14:02:26,980 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2016-12-29 14:02:26,981 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2016-12-29 14:02:26,981 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2016-12-29 14:02:26,981 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2016-12-29 14:02:26,985 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-29 14:02:26,998 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2016-12-29 14:02:26,999 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2016-12-29 14:02:27,001 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2016-12-29 14:02:27,001 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2016-12-29 14:02:27,003 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2016-12-29 14:02:27,003 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2016-12-29 14:02:27,004 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2016-12-29 14:02:27,006 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2016-12-29 14:02:27,007 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2016-12-29 14:02:27,008 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2016-12-29 14:02:27,048 - Created '20' parsers.
+2016-12-29 14:02:27,055 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2016-12-29 14:02:27,056 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2016-12-29 14:02:27,056 - Velocimacro : Default library not found.
+2016-12-29 14:02:27,056 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2016-12-29 14:02:27,056 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2016-12-29 14:02:27,056 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2016-12-29 14:02:27,056 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2016-12-29 14:02:27,078 - ResourceManager : found builder/templet/Entity.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-29 14:02:27,114 - Null reference [template 'builder/templet/Entity.vm', line 15, column 52] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,114 - Null reference [template 'builder/templet/Entity.vm', line 16, column 17] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,125 - Null reference [template 'builder/templet/Entity.vm', line 24, column 16] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,125 - Null reference [template 'builder/templet/Entity.vm', line 28, column 27] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,132 - ResourceManager : found builder/templet/IbatisDao(interface).vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-29 14:02:27,132 - Null reference [template 'builder/templet/IbatisDao(interface).vm', line 15, column 67] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,132 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/IbatisDao(interface).vm[line 16, column 30]
+2016-12-29 14:02:27,137 - ResourceManager : found builder/templet/ServiceImpl.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-29 14:02:27,137 - Null reference [template 'builder/templet/ServiceImpl.vm', line 18, column 69] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,138 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/ServiceImpl.vm[line 24, column 30]
+2016-12-29 14:02:27,193 - ResourceManager : found builder/templet/Ibatis.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-29 14:02:27,199 - Null reference [template 'builder/templet/Ibatis.vm', line 14, column 66] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,200 - Null reference [template 'builder/templet/Ibatis.vm', line 44, column 92] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,208 - Null reference [template 'builder/templet/Ibatis.vm', line 100, column 40] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,208 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/Ibatis.vm[line 104, column 30]
+2016-12-29 14:02:27,208 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/Ibatis.vm[line 165, column 30]
+2016-12-29 14:02:27,208 - Null reference [template 'builder/templet/Ibatis.vm', line 192, column 44] : ${idType} cannot be resolved.
+2016-12-29 14:02:27,211 - ResourceManager : found builder/templet/Controller(mybatis).vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-29 14:02:27,211 - Null reference [template 'builder/templet/Controller(mybatis).vm', line 24, column 80] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,691 - Log4JLogChute initialized using file 'velocity.log'
+2016-12-30 14:58:07,716 - Initializing Velocity, Calling init()...
+2016-12-30 14:58:07,717 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2016-12-30 14:58:07,717 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2016-12-30 14:58:07,717 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2016-12-30 14:58:07,717 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2016-12-30 14:58:07,717 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2016-12-30 14:58:07,717 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2016-12-30 14:58:07,720 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 14:58:07,732 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2016-12-30 14:58:07,734 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2016-12-30 14:58:07,735 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2016-12-30 14:58:07,735 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2016-12-30 14:58:07,736 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2016-12-30 14:58:07,737 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2016-12-30 14:58:07,738 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2016-12-30 14:58:07,739 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2016-12-30 14:58:07,740 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2016-12-30 14:58:07,741 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2016-12-30 14:58:07,775 - Created '20' parsers.
+2016-12-30 14:58:07,781 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2016-12-30 14:58:07,781 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2016-12-30 14:58:07,781 - Velocimacro : Default library not found.
+2016-12-30 14:58:07,781 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2016-12-30 14:58:07,781 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2016-12-30 14:58:07,782 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2016-12-30 14:58:07,782 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2016-12-30 14:58:07,810 - ResourceManager : found builder/templet/Entity.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 14:58:07,817 - Null reference [template 'builder/templet/Entity.vm', line 15, column 52] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,817 - Null reference [template 'builder/templet/Entity.vm', line 16, column 17] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,822 - Null reference [template 'builder/templet/Entity.vm', line 24, column 16] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,822 - Null reference [template 'builder/templet/Entity.vm', line 28, column 27] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,826 - ResourceManager : found builder/templet/IbatisDao(interface).vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 14:58:07,827 - Null reference [template 'builder/templet/IbatisDao(interface).vm', line 15, column 67] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,827 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/IbatisDao(interface).vm[line 16, column 30]
+2016-12-30 14:58:07,832 - ResourceManager : found builder/templet/ServiceImpl.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 14:58:07,832 - Null reference [template 'builder/templet/ServiceImpl.vm', line 18, column 69] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,832 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/ServiceImpl.vm[line 24, column 30]
+2016-12-30 14:58:07,844 - ResourceManager : found builder/templet/Ibatis.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 14:58:07,849 - Null reference [template 'builder/templet/Ibatis.vm', line 14, column 66] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,849 - Null reference [template 'builder/templet/Ibatis.vm', line 44, column 92] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,853 - Null reference [template 'builder/templet/Ibatis.vm', line 100, column 40] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,853 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/Ibatis.vm[line 104, column 30]
+2016-12-30 14:58:07,853 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/Ibatis.vm[line 165, column 30]
+2016-12-30 14:58:07,853 - Null reference [template 'builder/templet/Ibatis.vm', line 192, column 44] : ${idType} cannot be resolved.
+2016-12-30 14:58:07,856 - ResourceManager : found builder/templet/Controller(mybatis).vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 14:58:07,856 - Null reference [template 'builder/templet/Controller(mybatis).vm', line 24, column 80] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,371 - Log4JLogChute initialized using file 'velocity.log'
+2016-12-30 15:00:14,372 - Initializing Velocity, Calling init()...
+2016-12-30 15:00:14,372 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2016-12-30 15:00:14,372 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2016-12-30 15:00:14,372 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2016-12-30 15:00:14,372 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2016-12-30 15:00:14,372 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2016-12-30 15:00:14,372 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2016-12-30 15:00:14,376 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 15:00:14,388 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2016-12-30 15:00:14,389 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2016-12-30 15:00:14,390 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2016-12-30 15:00:14,391 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2016-12-30 15:00:14,391 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2016-12-30 15:00:14,392 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2016-12-30 15:00:14,393 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2016-12-30 15:00:14,394 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2016-12-30 15:00:14,395 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2016-12-30 15:00:14,396 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2016-12-30 15:00:14,430 - Created '20' parsers.
+2016-12-30 15:00:14,435 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2016-12-30 15:00:14,436 - Could not load resource 'VM_global_library.vm' from ResourceLoader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader: ClasspathResourceLoader Error: cannot find resource VM_global_library.vm
+2016-12-30 15:00:14,436 - Velocimacro : Default library not found.
+2016-12-30 15:00:14,436 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2016-12-30 15:00:14,436 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2016-12-30 15:00:14,436 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2016-12-30 15:00:14,436 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2016-12-30 15:00:14,465 - ResourceManager : found builder/templet/Entity.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 15:00:14,471 - Null reference [template 'builder/templet/Entity.vm', line 15, column 52] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,472 - Null reference [template 'builder/templet/Entity.vm', line 16, column 17] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,476 - Null reference [template 'builder/templet/Entity.vm', line 24, column 16] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,476 - Null reference [template 'builder/templet/Entity.vm', line 28, column 27] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,481 - ResourceManager : found builder/templet/IbatisDao(interface).vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 15:00:14,481 - Null reference [template 'builder/templet/IbatisDao(interface).vm', line 15, column 67] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,482 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/IbatisDao(interface).vm[line 16, column 30]
+2016-12-30 15:00:14,559 - ResourceManager : found builder/templet/ServiceImpl.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 15:00:14,559 - Null reference [template 'builder/templet/ServiceImpl.vm', line 18, column 69] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,559 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/ServiceImpl.vm[line 24, column 30]
+2016-12-30 15:00:14,570 - ResourceManager : found builder/templet/Ibatis.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 15:00:14,574 - Null reference [template 'builder/templet/Ibatis.vm', line 14, column 66] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,574 - Null reference [template 'builder/templet/Ibatis.vm', line 44, column 92] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,578 - Null reference [template 'builder/templet/Ibatis.vm', line 100, column 40] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,578 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/Ibatis.vm[line 104, column 30]
+2016-12-30 15:00:14,578 - Left side (${maker.batch}) of '==' operation has null value. If it is a reference, it may not be in the context or its toString() returned null. builder/templet/Ibatis.vm[line 165, column 30]
+2016-12-30 15:00:14,578 - Null reference [template 'builder/templet/Ibatis.vm', line 192, column 44] : ${idType} cannot be resolved.
+2016-12-30 15:00:14,580 - ResourceManager : found builder/templet/Controller(mybatis).vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+2016-12-30 15:00:14,580 - Null reference [template 'builder/templet/Controller(mybatis).vm', line 24, column 80] : ${idType} cannot be resolved.
